@@ -1,13 +1,22 @@
 import React from 'react'
 
-const MovieCard = ({ movie:
-  { title, vote_average, poster_path, release_date, original_language }
-}) => {
+const MovieCard = ({ movie, onCardClick }) => {
+  if (!movie) {
+    return null;
+  }
+
+  const { title, vote_average, poster_path, release_date, original_language } = movie;
+
+  // Corrected the 'src' attribute to use proper template literal syntax
+  const posterUrl = poster_path ? `/img/t/p/w500${poster_path}` : '/no-movie.png';
+
   return (
-    <div className="movie-card">
+    <div
+      className="movie-card cursor-pointer hover:scale-105 hover:shadow-light-100/20 transition-transform duration-300"
+      onClick={() => onCardClick(movie)}
+    >
       <img
-        src={poster_path ?
-          `https://image.tmdb.org/t/p/w500/${poster_path}` : '/no-movie.png'}
+        src={posterUrl}
         alt={title}
       />
 
@@ -32,4 +41,5 @@ const MovieCard = ({ movie:
     </div>
   )
 }
+
 export default MovieCard
