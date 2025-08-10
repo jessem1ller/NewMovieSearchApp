@@ -7,7 +7,6 @@ const MovieCard = ({ movie, onCardClick }) => {
 
   const { title, vote_average, poster_path, release_date, original_language } = movie;
 
-  // Corrected the 'src' attribute to use proper template literal syntax
   const posterUrl = poster_path ? `/img/t/p/w500${poster_path}` : '/no-movie.png';
 
   return (
