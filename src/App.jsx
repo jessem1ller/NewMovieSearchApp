@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import Search from './components/search.jsx';
-import Spinner from './components/Spinner.jsx';
-import MovieCard from './components/MovieCard.jsx';
-import Modal from './components/Modal.jsx';
-import MovieDetail from './components/MovieDetail.jsx';
+import Search from '@/components/search.jsx';
+import Spinner from '@/components/Spinner.jsx';
+import MovieCard from '@/components/MovieCard.jsx';
+import Modal from '@/components/Modal.jsx';
+import MovieDetail from '@/components/MovieDetail.jsx';
 import { useDebounce } from 'react-use';
-import { getTrendingMovies, updateSearchCount } from './appwrite.js';
-import { getMovies, getGenres, getMovieDetails } from './services/tmdb.js';
+import { getTrendingMovies, updateSearchCount } from '@/appwrite.js';
+import { getMovies, getGenres, getMovieDetails } from '@/services/tmdb.js';
 
 const App = () => {
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
