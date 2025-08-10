@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from './Spinner.jsx';
+import Spinner from '@/components/Spinner.jsx';
 
 const MovieDetail = ({ movie, details, isLoading, genres }) => {
   if (isLoading) {
