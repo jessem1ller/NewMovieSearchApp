@@ -13,8 +13,12 @@ const MovieDetail = ({ movie, details, isLoading, genres }) => {
   const displayData = details || movie;
   if (!displayData) return null;
 
+  const imageBaseUrl = import.meta.env.PROD
+    ? 'https://image.tmdb.org'
+    : '/img';
+
   const posterUrl = displayData.poster_path
-    ? `/img/t/p/w500${displayData.poster_path}`
+    ? `${imageBaseUrl}/t/p/w500${displayData.poster_path}`
     : 'https://placehold.co/500x750/0f0d23/cecefb?text=No+Image';
 
   const movieGenres = (displayData.genres || displayData.genre_ids.map(id => genres.find(g => g.id === id)))
@@ -37,10 +41,8 @@ const MovieDetail = ({ movie, details, isLoading, genres }) => {
           className="rounded-lg w-full h-auto object-cover shadow-lg"
         />
       </div>
-
       <div className="flex flex-col gap-4 text-light-100">
         <h2 className="text-3xl sm:text-4xl font-bold text-white leading-tight">{displayData.title}</h2>
-
         {movieGenres.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {movieGenres.map(genre => (
@@ -50,39 +52,37 @@ const MovieDetail = ({ movie, details, isLoading, genres }) => {
             ))}
           </div>
         )}
-
         <div>
           <h3 className="text-xl font-bold text-white mb-2">Overview</h3>
           <p className="text-gray-100 text-base leading-relaxed">{displayData.overview || "No overview available."}</p>
         </div>
-
         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-4 pt-4 text-base border-t border-light-100/10">
-            <div>
-                <span className="font-bold text-white">User Rating:</span>
-                <p className="text-gray-100">{displayData.vote_average ? `${displayData.vote_average.toFixed(1)} / 10` : 'N/A'}</p>
+          <div>
+            <span className="font-bold text-white">User Rating:</span>
+            <p className="text-gray-100">{displayData.vote_average ? `${displayData.vote_average.toFixed(1)} / 10` : 'N/A'}</p>
+          </div>
+          <div>
+            <span className="font-bold text-white">MPAA Rating:</span>
+            <p className="text-gray-100">{details?.certification || 'N/A'}</p>
+          </div>
+          <div>
+            <span className="font-bold text-white">Runtime:</span>
+            <p className="text-gray-100">{formatRuntime(details?.runtime)}</p>
+          </div>
+          <div>
+            <span className="font-bold text-white">Director:</span>
+            <p className="text-gray-100">{details?.director || 'N/A'}</p>
+          </div>
+          <div>
+            <span className="font-bold text-white">Release Date:</span>
+            <p className="text-gray-100">{displayData.release_date || 'N/A'}</p>
+          </div>
+          {details?.production_companies?.[0] && (
+            <div className="col-span-2 md:col-span-1">
+              <span className="font-bold text-white">Studio:</span>
+              <p className="text-gray-100">{details.production_companies[0].name}</p>
             </div>
-            <div>
-                <span className="font-bold text-white">MPAA Rating:</span>
-                <p className="text-gray-100">{details?.certification || 'N/A'}</p>
-            </div>
-            <div>
-                <span className="font-bold text-white">Runtime:</span>
-                <p className="text-gray-100">{formatRuntime(details?.runtime)}</p>
-            </div>
-            <div>
-                <span className="font-bold text-white">Director:</span>
-                <p className="text-gray-100">{details?.director || 'N/A'}</p>
-            </div>
-            <div>
-                <span className="font-bold text-white">Release Date:</span>
-                <p className="text-gray-100">{displayData.release_date || 'N/A'}</p>
-            </div>
-            {details?.production_companies?.[0] && (
-              <div className="col-span-2 md:col-span-1">
-                  <span className="font-bold text-white">Studio:</span>
-                  <p className="text-gray-100">{details.production_companies[0].name}</p>
-              </div>
-            )}
+          )}
         </div>
       </div>
     </div>
