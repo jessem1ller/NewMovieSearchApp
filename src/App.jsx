@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Search from '@/components/search.jsx';
+import Search from '@/components/Search.jsx';
 import Spinner from '@/components/Spinner.jsx';
 import MovieCard from '@/components/MovieCard.jsx';
 import Modal from '@/components/Modal.jsx';
